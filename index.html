@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nim Game (LeetCode 292): Why Multiples of 4 Lose</title><style>body{max-width:760px;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6}pre{background:#f4f4f4;padding:1rem;overflow:auto}</style></head><body><h1>Nim Game (LeetCode 292): Why Multiples of 4 Lose</h1>
+<p>There's a heap of <code>n</code> stones. Players alternate removing 1, 2 or 3 stones, and whoever takes the last stone wins. You go first. Return whether you can win with optimal play.</p>
+<h2>Find the pattern with small cases</h2>
+<ul>
+<li>1, 2 or 3 stones: take them all and win.</li>
+<li>4 stones: whatever you take, your opponent takes the rest. You lose.</li>
+<li>5, 6 or 7: take 1, 2 or 3 to leave your opponent at 4. You win.</li>
+<li>8: every move leaves 5 to 7, a winning spot for them. You lose.</li>
+</ul>
+<p>The losing positions are exactly the multiples of 4.</p>
+<pre><code class="language-python">def can_win_nim(n: int) -&gt; bool:
+    return n % 4 != 0
+</code></pre>
+<h2>Why it works</h2>
+<p>If <code>n</code> is not a multiple of 4, take <code>n % 4</code> stones. Now whatever your opponent removes (k stones), you remove <code>4 - k</code>, keeping the pile a multiple of 4 until it hits zero on your move.</p>
+<h2>DP is the honest first draft</h2>
+<p>A boolean DP where <code>win[i] = not all(win[i-1], win[i-2], win[i-3])</code> finds the pattern for you. Interviewers like seeing you derive the formula from it instead of reciting it.</p>
+<h2>Interview tip</h2>
+<p>Work small cases out loud. If you'd like to practise that kind of reasoning under pressure, <a href="https://www.linkjob.ai/interview-copilot/">real-time AI interview help</a> can help.</p>
+<p><em>Disclosure: I work on Linkjob AI.</em></p></body></html>
